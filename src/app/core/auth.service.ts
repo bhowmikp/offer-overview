@@ -21,7 +21,7 @@ interface User {
 export class AuthService {
 
   user: Observable<User>;
-  
+
   constructor(
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
@@ -32,25 +32,25 @@ export class AuthService {
     this.user = this.afAuth.authState.pipe(
       switchMap(user => {
         if (user) {
-          return this.afs.doc<User>(`users/${user.uid}`).valueChanges()
+          return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
         } else {
-          return of(null)
+          return of(null);
         }
       })
-    )
+    );
   }
 
 
   googleLogin() {
-    const provider = new auth.GoogleAuthProvider()
+    const provider = new auth.GoogleAuthProvider();
     return this.oAuthLogin(provider);
   }
 
   private oAuthLogin(provider) {
     return this.afAuth.auth.signInWithPopup(provider)
       .then((credential) => {
-        this.updateUserData(credential.user)
-      })
+        this.updateUserData(credential.user);
+      });
   }
 
   private updateUserData(user) {
@@ -63,9 +63,9 @@ export class AuthService {
       email: user.email,
       displayName: user.displayName,
       photoURL: user.photoURL
-    }
+    };
 
-    return userRef.set(data, { merge: true })
+    return userRef.set(data, { merge: true });
 
   }
 

@@ -8,13 +8,19 @@ import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 
 import { CoreModule } from './core/core.module';
-import { LoginPageComponent } from './login-page/login-page.component';
+import { HomepageComponent } from './homepage/homepage.component';
+import { LoginPageComponent } from './homepage/login-page/login-page.component';
+import { TablePageComponent } from './homepage/table-page/table-page.component';
+import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginPageComponent
+    HomepageComponent,
+    LoginPageComponent,
+    TablePageComponent,
+    DashboardPageComponent
   ],
   imports: [
     BrowserModule,

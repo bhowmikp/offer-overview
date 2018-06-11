@@ -1,4 +1,11 @@
-<!--The content below is only a placeholder and can be replaced.-->
+<nav>
+  <div class="brand">
+    <a routerLink="" routerLinkActive="active">Offer Overview</a>
+  </div>
+  <div class="options">
+    <a routerLink="dashboard" routerLinkActive="active">Dashboard</a>
+    <a routerLink="" (click)="auth.signOut()">Logout</a>
+  </div>
+</nav>
 
-<app-login-page></app-login-page>
 <router-outlet></router-outlet>
