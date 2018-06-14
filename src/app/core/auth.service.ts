@@ -9,12 +9,11 @@ import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 
-interface User {
+export interface User {
   uid: string;
   email: string;
   photoURL?: string;
   displayName?: string;
-  favoriteColor?: string;
 }
 
 @Injectable()
@@ -45,6 +44,10 @@ export class AuthService {
     const provider = new auth.GoogleAuthProvider();
     return this.oAuthLogin(provider);
   }
+
+  // getUserInfo() {
+  //   return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
+  // }
 
   private oAuthLogin(provider) {
     return this.afAuth.auth.signInWithPopup(provider)

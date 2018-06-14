@@ -1,4 +1,6 @@
 <h3>Howdy, {{ user.displayName }}</h3>
-<img  [src]="user.photoURL">
-<p>UID: {{ user.uid }}</p>
-<p>Favorite Color: {{ user?.favoriteColor }} </p>
+<button (click)="addJob()">Add!</button>
+<br>
+<button (click)="deleteJob()">Delete!</button>
+<br><br>
+<!-- {{ ( userData | async )?.displayName }} -->
