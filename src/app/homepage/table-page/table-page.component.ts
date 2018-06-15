@@ -1,14 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from '../../core/auth.service';
+import { JobsService } from '../../core/jobs.service';
 import { AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore';
+import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs';
-
-export interface JobsFormat {
-  jobId: number;
-  companyName: string;
-  location: string;
-  salary: number;
-}
 
 @Component({
   selector: 'app-table-page',
@@ -16,40 +11,52 @@ export interface JobsFormat {
   styleUrls: ['./table-page.component.css']
 })
 export class TablePageComponent implements OnInit {
-  // collection = list
-  // document = object
+
+  JobDetails = {
+    jobId: 0,
+    companyName: '',
+    location: '',
+    salary: 0
+  }
+
+  displayedColumns = ['Company Name', 'Location', 'Salary'];
+
   count: number = 0;
   @Input() user;
 
-  jobsCollection : AngularFirestoreCollection<JobsFormat>;
-  jobs: Observable<JobsFormat[]>;
-
-  constructor(public auth: AuthService, public afs: AngularFirestore) { }
+  constructor(private jobsService: JobsService,
+              public auth: AuthService,
+              public afs: AngularFirestore) { }
 
   ngOnInit() {
-    this.jobsCollection = this.afs.collection<JobsFormat>(`users/${this.user.uid}/jobs`);
-    this.jobs = this.jobsCollection.valueChanges();
-    this.jobs.subscribe(val => {console.log(val);});
+    let dataSoruce = new JobDataSource(this.jobsService, this.user.uid);
   }
 
   addJob() {
     let id = this.count;
-    var item: JobsFormat = {
+    let item = {
       jobId: id,
       companyName: "Google",
       location: "NY",
       salary: 5000
     };
     this.count++;
-    this.jobsCollection.doc(String(id)).set(item);
+    this.jobsService.addJob(this.user.uid, id, item);
   }
 
-  deleteJob() {
-    let jobNumber = [0];
+}
 
-    for (let job of jobNumber) {
-      this.afs.doc(`users/${this.user.uid}/jobs/${job}`).delete();
-    }
+export class JobDataSource extends DataSource<any> {
+
+  constructor(private jobsService: JobsService, private userId: String){
+    super();
   }
 
+  connect() {
+    return this.jobsService.getJobs(this.userId);
+  }
+
+  disconnect() {
+
+  }
 }
