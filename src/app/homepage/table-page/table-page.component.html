@@ -1,3 +1,4 @@
+<!-- Add Data -->
 <div class="container">
   <form #f="ngForm" (ngSubmit)="onSubmit(f)">
     <mat-form-field appearance="standard" hintLabel="Max 20 characters">
@@ -19,19 +20,41 @@
       <span matSuffix>.00</span>
     </mat-form-field>
 
-    <button type="submit" class="btn btn-success">Add</button>
+    <button type="submit" class="btn btn-success" (click)="openSnackBar(f, 'Enter Company Name', 'Alright')">Add</button>
   </form>
 </div>
 
+<!-- Delete Button -->
+<button type="button" name="delete" (click)="deleteUsers()">Delete</button>
+
+<!-- Filter Data -->
 <div class="example-header">
   <mat-form-field>
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
   </mat-form-field>
 </div>
 
+
+<!-- Table -->
 <div class="example-container mat-elevation-z8">
 
   <mat-table [dataSource]="dataSource" matSort>
+
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef style="padding-right: 1%">
+        <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()">
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row" style="padding-right: 1%">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)">
+        </mat-checkbox>
+      </td>
+    </ng-container>
 
     <!-- Name Column -->
     <ng-container matColumnDef="companyName">
@@ -67,7 +90,7 @@
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;" (keyup.enter)="save(row)">
+    <mat-row *matRowDef="let row; columns: displayedColumns;" (keyup.enter)="save(row)" (click)="selection.toggle(row)">
     </mat-row>
 
   </mat-table>
