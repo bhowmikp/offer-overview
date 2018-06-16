@@ -22,10 +22,13 @@ export class TablePageComponent {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
+  @Input() user;
+
   constructor(private jobsService: JobsService) {
-    // Assign the data to the data source for the table to render
-    // Set the paginator and sort
-    this.jobsService.getJobs('SOYzrrmi7revQ6TO5SG7rC8m4mE2').subscribe(data => {
+  }
+
+  ngAfterViewInit() {
+    this.jobsService.getJobs(this.user.uid).subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
