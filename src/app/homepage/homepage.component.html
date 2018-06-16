@@ -12,6 +12,6 @@
 <!-- User logged in -->
 <ng-template #authenticated>
   <div *ngIf="auth.user | async as user">
-    <app-table-page [user]=user></app-table-page>
+    <app-table-page></app-table-page>
   </div>
 </ng-template>

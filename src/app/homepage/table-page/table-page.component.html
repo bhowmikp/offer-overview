@@ -1,6 +1,35 @@
-<h3>Howdy, {{ user.displayName }}</h3>
-<button (click)="addJob()">Add!</button>
-<br>
-<button (click)="deleteJob()">Delete!</button>
-<br><br>
-<!-- {{ ( userData | async )?.displayName }} -->
+<div class="example-header">
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+</div>
+
+<div class="example-container mat-elevation-z8">
+
+  <mat-table [dataSource]="dataSource" matSort>
+
+    <!-- Location Column -->
+    <ng-container matColumnDef="location">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Location </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.location}} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="companyName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Company </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.companyName}} </mat-cell>
+    </ng-container>
+
+    <!-- Salary Column -->
+    <ng-container matColumnDef="salary">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Salary </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.salary}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;">
+    </mat-row>
+  </mat-table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>

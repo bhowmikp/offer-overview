@@ -8,7 +8,7 @@ export class JobsService {
 
   // collection = list
   // document = object
-  
+
   constructor(private afs: AngularFirestore) { }
 
   addJob(userId, jobId, item) {
