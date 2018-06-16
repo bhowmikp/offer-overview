@@ -1,3 +1,33 @@
+<div class="container">
+  <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+    <mat-form-field appearance="standard" hintLabel="Max 20 characters">
+      <mat-label>Name of Company</mat-label>
+      <input matInput #input maxlength="20" placeholder="Company Name *" required name="companyName" ngModel>
+      <mat-hint align="end">{{input.value?.length || 0}}/20</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="standard" hintLabel="Max 100 characters">
+      <mat-label>Position Location</mat-label>
+      <input matInput #input maxlength="20" placeholder="Address" name="location" ngModel>
+      <mat-hint align="end">{{input.value?.length || 0}}/100</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="standard">
+      <mat-label>Salary</mat-label>
+      <input matInput placeholder="Amount" type="number" class="example-right-align" name="salary" ngModel>
+      <span matPrefix>$&nbsp;</span>
+      <span matSuffix>.00</span>
+    </mat-form-field>
+
+    <button type="submit" class="btn btn-success">Add</button>
+  </form>
+
+  <!-- <mat-form-field hintLabel="Max 10 characters">
+    <input matInput #input maxlength="10" placeholder="Enter some input">
+    <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+  </mat-form-field> -->
+</div>
+
 <div class="example-header">
   <mat-form-field>
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
@@ -7,17 +37,16 @@
 <div class="example-container mat-elevation-z8">
 
   <mat-table [dataSource]="dataSource" matSort>
+    <!-- Name Column -->
+    <ng-container matColumnDef="companyName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Company </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.companyName}} </mat-cell>
+    </ng-container>
 
     <!-- Location Column -->
     <ng-container matColumnDef="location">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Location </mat-header-cell>
       <mat-cell *matCellDef="let row"> {{row.location}} </mat-cell>
-    </ng-container>
-
-    <!-- Name Column -->
-    <ng-container matColumnDef="companyName">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Company </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.companyName}} </mat-cell>
     </ng-container>
 
     <!-- Salary Column -->

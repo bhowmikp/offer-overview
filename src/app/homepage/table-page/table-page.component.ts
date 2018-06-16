@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { JobsService } from '../../core/jobs.service';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import {NgForm} from '@angular/forms';
 
 export interface JobData {
   jobId: number;
@@ -39,5 +40,14 @@ export class TablePageComponent {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
     this.dataSource.filter = filterValue;
+  }
+
+  onSubmit(form){
+    let a = this.jobsService.getJobs(this.user.uid).subscribe(data => {
+      let newJobId = data[0]['jobId'] + 1;
+      form.jobId = newJobId;
+      this.jobsService.addJob(this.user.uid, newJobId, form);
+      a.unsubscribe();
+    });
   }
 }
