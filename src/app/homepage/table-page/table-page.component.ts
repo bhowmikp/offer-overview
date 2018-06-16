@@ -54,7 +54,7 @@ export class TablePageComponent {
         newJobId = data[0]['jobId'] + 1;
       }
 
-      if (form.value["companyName"] !== "") {
+      if (form.value["companyName"] !== "" && form.value["companyName"] !== null) {
         form.value.jobId = newJobId;
         this.jobsService.addJob(this.user.uid, newJobId, form.value);
         form.reset();
@@ -74,10 +74,11 @@ export class TablePageComponent {
       jobIdDelete.push(job['jobId']);
     }
     this.jobsService.deleteJobs(this.user.uid, jobIdDelete);
+    this.selection.clear();
   }
 
   openSnackBar(form, message: string, action: string) {
-    if (form.value["companyName"] === "") {
+    if (form.value["companyName"] === "" || form.value["companyName"] === null) {
       this.snackBar.open(message, action, {
         duration: 2000,
       });
