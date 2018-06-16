@@ -44,10 +44,25 @@ export class TablePageComponent {
 
   onSubmit(form){
     let a = this.jobsService.getJobs(this.user.uid).subscribe(data => {
-      let newJobId = data[0]['jobId'] + 1;
-      form.jobId = newJobId;
-      this.jobsService.addJob(this.user.uid, newJobId, form);
+      let newJobId;
+
+      if (data === undefined || data.length == 0) {
+        newJobId = 1;
+      } else {
+        newJobId = data[0]['jobId'] + 1;
+      }
+
+      if (form.value["companyName"] !== "") {
+        form.value.jobId = newJobId;
+        this.jobsService.addJob(this.user.uid, newJobId, form.value);
+        form.reset();
+      }
+
       a.unsubscribe();
     });
+  }
+
+  save(value) {
+    this.jobsService.addJob(this.user.uid, value["jobId"], value);
   }
 }

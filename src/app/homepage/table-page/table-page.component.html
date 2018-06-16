@@ -1,8 +1,8 @@
 <div class="container">
-  <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
     <mat-form-field appearance="standard" hintLabel="Max 20 characters">
-      <mat-label>Name of Company</mat-label>
-      <input matInput #input maxlength="20" placeholder="Company Name *" required name="companyName" ngModel>
+      <mat-label>Name of Company *</mat-label>
+      <input matInput #input maxlength="20" placeholder="Company Name" name="companyName" ngModel>
       <mat-hint align="end">{{input.value?.length || 0}}/20</mat-hint>
     </mat-form-field>
 
@@ -21,11 +21,6 @@
 
     <button type="submit" class="btn btn-success">Add</button>
   </form>
-
-  <!-- <mat-form-field hintLabel="Max 10 characters">
-    <input matInput #input maxlength="10" placeholder="Enter some input">
-    <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
-  </mat-form-field> -->
 </div>
 
 <div class="example-header">
@@ -37,27 +32,44 @@
 <div class="example-container mat-elevation-z8">
 
   <mat-table [dataSource]="dataSource" matSort>
+
     <!-- Name Column -->
     <ng-container matColumnDef="companyName">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Company </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.companyName}} </mat-cell>
+      <mat-cell *matCellDef="let row">
+				<mat-form-field appearance="outline">
+					<input matInput placeholder="Company Name" [value]="row.companyName" [(ngModel)]="row.companyName">
+          <mat-icon matSuffix>edit</mat-icon>
+				</mat-form-field>
+			</mat-cell>
     </ng-container>
 
     <!-- Location Column -->
     <ng-container matColumnDef="location">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Location </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.location}} </mat-cell>
+      <mat-cell *matCellDef="let row">
+				<mat-form-field appearance="outline">
+					<input matInput placeholder="Location" [value]="row.location" [(ngModel)]="row.location">
+          <mat-icon matSuffix>edit</mat-icon>
+				</mat-form-field>
+			</mat-cell>
     </ng-container>
 
     <!-- Salary Column -->
     <ng-container matColumnDef="salary">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Salary </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.salary}} </mat-cell>
+      <mat-cell *matCellDef="let row">
+				<mat-form-field appearance="outline">
+					<input matInput placeholder="Salary" [value]="row.salary" [(ngModel)]="row.salary">
+          <mat-icon matSuffix>edit</mat-icon>
+				</mat-form-field>
+			</mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;">
+    <mat-row *matRowDef="let row; columns: displayedColumns;" (keyup.enter)="save(row)">
     </mat-row>
+
   </mat-table>
 
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
