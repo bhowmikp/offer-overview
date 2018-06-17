@@ -26,7 +26,11 @@ export interface JobData {
   styleUrls: ['./table-page.component.css']
 })
 export class TablePageComponent {
-  displayedColumns = ['select', 'companyName', 'location', 'salary'];
+  displayedColumns = [
+    'select', 'companyName', 'positionTitle', 'location',
+    'jobTenure', 'salary', 'signingBonus', 'tax',
+    'livingCost', 'prestige', 'happiness', 'notes'
+  ];
   dataSource: MatTableDataSource<{}>;
 
   selection = new SelectionModel<{}>(true, []);

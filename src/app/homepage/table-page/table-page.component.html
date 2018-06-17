@@ -43,6 +43,28 @@
 			</mat-cell>
     </ng-container>
 
+    <!-- Position Column -->
+    <ng-container matColumnDef="positionTitle">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Title </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+				<mat-form-field appearance="outline">
+					<input matInput placeholder="Title" [value]="row.positionTitle" [(ngModel)]="row.positionTitle" (click)="selection.toggle(row)">
+          <mat-icon matSuffix>edit</mat-icon>
+				</mat-form-field>
+			</mat-cell>
+    </ng-container>
+
+    <!-- Time Column -->
+    <ng-container matColumnDef="jobTenure">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Tenure Length (months)</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+				<mat-form-field appearance="outline">
+					<input matInput placeholder="Tenure Length" [value]="row.jobTenure" [(ngModel)]="row.jobTenure" (click)="selection.toggle(row)">
+          <mat-icon matSuffix>edit</mat-icon>
+				</mat-form-field>
+			</mat-cell>
+    </ng-container>
+
     <!-- Location Column -->
     <ng-container matColumnDef="location">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Location </mat-header-cell>
@@ -56,7 +78,7 @@
 
     <!-- Salary Column -->
     <ng-container matColumnDef="salary">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Salary </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> $ Salary (month) </mat-header-cell>
       <mat-cell *matCellDef="let row">
 				<mat-form-field appearance="outline">
 					<input matInput placeholder="Salary" [value]="row.salary" [(ngModel)]="row.salary" (click)="selection.toggle(row)">
@@ -64,6 +86,73 @@
 				</mat-form-field>
 			</mat-cell>
     </ng-container>
+
+    <!-- Signing Bonus Column -->
+    <ng-container matColumnDef="signingBonus">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> $ Signing Bonus </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+				<mat-form-field appearance="outline">
+					<input matInput placeholder="Signing Bonus" [value]="row.signingBonus" [(ngModel)]="row.signingBonus" (click)="selection.toggle(row)">
+          <mat-icon matSuffix>edit</mat-icon>
+				</mat-form-field>
+			</mat-cell>
+    </ng-container>
+
+    <!-- Tax Column -->
+    <ng-container matColumnDef="tax">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Tax % </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+				<mat-form-field appearance="outline">
+					<input matInput placeholder="Tax" [value]="row.tax" [(ngModel)]="row.tax" (click)="selection.toggle(row)">
+          <mat-icon matSuffix>edit</mat-icon>
+				</mat-form-field>
+			</mat-cell>
+    </ng-container>
+
+    <!-- Living Cost Column -->
+    <ng-container matColumnDef="livingCost">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> $ Living Cost (month) </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+				<mat-form-field appearance="outline">
+					<input matInput placeholder="Living Cost" [value]="row.livingCost" [(ngModel)]="row.livingCost" (click)="selection.toggle(row)">
+          <mat-icon matSuffix>edit</mat-icon>
+				</mat-form-field>
+			</mat-cell>
+    </ng-container>
+
+    <!-- Prestige Column -->
+    <ng-container matColumnDef="prestige">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Prestige (1 - 10) </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+				<mat-form-field appearance="outline">
+					<input matInput placeholder="Prestige" [value]="row.prestige" [(ngModel)]="row.prestige" (click)="selection.toggle(row)">
+          <mat-icon matSuffix>edit</mat-icon>
+				</mat-form-field>
+			</mat-cell>
+    </ng-container>
+
+    <!-- Happiness Column -->
+    <ng-container matColumnDef="happiness">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Happiness (1 - 10) </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+				<mat-form-field appearance="outline">
+					<input matInput placeholder="Happiness" [value]="row.happiness" [(ngModel)]="row.happiness" (click)="selection.toggle(row)">
+          <mat-icon matSuffix>edit</mat-icon>
+				</mat-form-field>
+			</mat-cell>
+    </ng-container>
+
+    <!-- Notes Column -->
+    <ng-container matColumnDef="notes">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Notes </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+				<mat-form-field appearance="outline">
+					<textarea matInput placeholder="Notes" style="height:11px;" [value]="row.notes" [(ngModel)]="row.notes" (click)="selection.toggle(row)"></textarea>
+          <mat-icon matSuffix>edit</mat-icon>
+				</mat-form-field>
+			</mat-cell>
+    </ng-container>
+
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;" (keyup.enter)="save(row)" (click)="selection.toggle(row)">

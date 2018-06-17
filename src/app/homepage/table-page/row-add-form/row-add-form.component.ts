@@ -76,7 +76,7 @@ export class RowAddFormComponent implements OnInit {
       if (data === undefined || data.length == 0) {
         newJobId = 1;
       } else {
-        newJobId = data[0]['jobId'] + 1;
+        newJobId = parseInt(data[0]['jobId'], 10) + 1;
       }
 
       let finalData = {};

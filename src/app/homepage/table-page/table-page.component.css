@@ -1,7 +1,29 @@
 .mat-form-field {
-  padding-right: 30px;
+  padding-right: 15px;
 }
 
-table {
+.mat-row,
+.mat-header-row {
+  min-width: 3000px;
   width: 100%;
+  width: max-content;
+}
+
+.mat-table {
+  overflow: scroll;
+  max-height: 500px;
+}
+
+.mat-cell,
+.mat-header-cell {
+  min-width: 90px;
+}
+
+/*unnecessary to make table header fixed*/
+.mat-header-row {
+  top: 0;
+  position: sticky;
+  z-index: 1;
+  background-color: inherit;
+  text-align: center;
 }
