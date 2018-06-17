@@ -60,6 +60,31 @@ export class TablePageComponent {
   }
 
   save(value) {
+    if (value["jobTenure"] == "" || value["jobTenure"] < 1) {
+      value["jobTenure"] = 12;
+    }
+
+    if (value["signingBonus"] == "" || value["signingBonus"] < 0) {
+      value["signingBonus"] = 0;
+    }
+
+    if (value["tax"] == "" || value["tax"] < 0) {
+      value["tax"] = 0;
+    }
+
+    if (value["livingCost"] == "" || value["livingCost"] < 0) {
+      value["livingCost"] = 0;
+    }
+
+    if (value["prestige"] == "" || value["prestige"] < 0 || value["prestige"] >10) {
+      value["prestige"] = 5;
+    }
+
+    if (value["happiness"] == "" || value["happiness"] < 0 || value["happiness"] > 10) {
+      console.log(value["happiness"]);
+      value["happiness"] = 5;
+    }
+
     this.jobsService.addJob(this.user.uid, value["jobId"], value);
   }
 
@@ -84,6 +109,34 @@ export class TablePageComponent {
     this.isAllSelected() ?
         this.selection.clear() :
         this.dataSource.data.forEach(row => this.selection.select(row));
+  }
+
+  getColor(value) {
+    if (value.value == 1) {
+      return "#FF7700";
+    } else if (value.value == 2){
+      return "#FF9900";
+    } else if (value.value == 3){
+      return "#FFBB00";
+    } else if (value.value == 4){
+      return "#FFDD00";
+    } else if (value.value == 5){
+      return "#FFFF00";
+    } else if (value.value == 6){
+      return "#DDFF00";
+    } else if (value.value == 7){
+      return "#BBFF00";
+    } else if (value.value == 8){
+      return "#99FF00";
+    } else if (value.value == 9){
+      return "#77FF00";
+    } else if (value.value == 10){
+      return "#55FF00";
+    } else if (value.value < 1){
+      return "#FF0000";
+    } else if (value.value > 10){
+      return "00FF00";
+    }
   }
 
 }

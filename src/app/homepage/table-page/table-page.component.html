@@ -127,7 +127,7 @@
       <mat-header-cell *matHeaderCellDef mat-sort-header> Prestige (1 - 10) </mat-header-cell>
       <mat-cell *matCellDef="let row">
 				<mat-form-field appearance="outline">
-					<input matInput type="number" placeholder="Prestige" [value]="row.prestige" [(ngModel)]="row.prestige" (click)="selection.toggle(row)" min="1" max="10">
+					<input matInput type="number" placeholder="Prestige" [value]="row.prestige" [(ngModel)]="row.prestige" (click)="selection.toggle(row)" min="1" max="10" [ngStyle]="{'color': getColor(color1)}" style="font-weight:bold" #color1 >
           <mat-icon matSuffix>edit</mat-icon>
 				</mat-form-field>
 			</mat-cell>
@@ -138,7 +138,7 @@
       <mat-header-cell *matHeaderCellDef mat-sort-header> Happiness (1 - 10) </mat-header-cell>
       <mat-cell *matCellDef="let row">
 				<mat-form-field appearance="outline">
-					<input matInput type="number" placeholder="Happiness" [value]="row.happiness" [(ngModel)]="row.happiness" (click)="selection.toggle(row)" min="1" max="10">
+					<input matInput type="number" placeholder="Happiness" [value]="row.happiness" [(ngModel)]="row.happiness" (click)="selection.toggle(row);" min="1" max="10" [ngStyle]="{'color': getColor(color2)}" style="font-weight:bold" #color2 >
           <mat-icon matSuffix>edit</mat-icon>
 				</mat-form-field>
 			</mat-cell>

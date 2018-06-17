@@ -106,23 +106,23 @@ export class RowAddFormComponent implements OnInit {
       key = Object.keys(element);
 
       // set defaults
-      if (key == "jobTenure" && element[key] == "") {
+      if (key == "jobTenure" && (element[key] == "" || element[key] < 1)) {
         finalData[key] = 12;
-      } else if (key == "signingBonus" && element[key] == "") {
+      } else if (key == "signingBonus" && (element[key] == "" || element[key] < 0)) {
         finalData[key] = 0;
-      } else if (key == "tax" && element[key] == "") {
+      } else if (key == "tax" && (element[key] == "" || element[key] < 0)) {
         finalData[key] = 0;
-      } else if (key == "livingCost" && element[key] == "") {
+      } else if (key == "livingCost" && (element[key] == "" || element[key] < 0)) {
         finalData[key] = 0;
-      } else if (key == "prestige" && element[key] == "") {
+      } else if (key == "prestige" && (element[key] == "" || element[key] < 0 || element[key] >10)) {
         finalData[key] = 5;
-      } else if (key == "happiness" && element[key] == "") {
+      } else if (key == "happiness" && (element[key] == "" || element[key] < 0 || element[key] >10)) {
         finalData[key] = 5;
       } else {
         finalData[key] = element[key];
       }
     }
-    
+
     return finalData;
   }
 }
