@@ -61,7 +61,7 @@
       <mat-header-cell *matHeaderCellDef mat-sort-header> Tenure Length (months)</mat-header-cell>
       <mat-cell *matCellDef="let row">
 				<mat-form-field appearance="outline">
-					<input matInput placeholder="Tenure Length" [value]="row.jobTenure" [(ngModel)]="row.jobTenure" (click)="selection.toggle(row)">
+					<input matInput type="number" placeholder="Tenure Length" [value]="row.jobTenure" [(ngModel)]="row.jobTenure" (click)="selection.toggle(row)" min="1">
           <mat-icon matSuffix>edit</mat-icon>
 				</mat-form-field>
 			</mat-cell>
@@ -83,7 +83,7 @@
       <mat-header-cell *matHeaderCellDef mat-sort-header> $ Salary (month) </mat-header-cell>
       <mat-cell *matCellDef="let row">
 				<mat-form-field appearance="outline">
-					<input matInput placeholder="Salary" [value]="row.salary" [(ngModel)]="row.salary" (click)="selection.toggle(row)">
+					<input matInput type="number" placeholder="Salary" [value]="row.salary" [(ngModel)]="row.salary" (click)="selection.toggle(row)" min="0">
           <mat-icon matSuffix>edit</mat-icon>
 				</mat-form-field>
 			</mat-cell>
@@ -94,7 +94,7 @@
       <mat-header-cell *matHeaderCellDef mat-sort-header> $ Signing Bonus </mat-header-cell>
       <mat-cell *matCellDef="let row">
 				<mat-form-field appearance="outline">
-					<input matInput placeholder="Signing Bonus" [value]="row.signingBonus" [(ngModel)]="row.signingBonus" (click)="selection.toggle(row)">
+					<input matInput type="number" placeholder="Signing Bonus" [value]="row.signingBonus" [(ngModel)]="row.signingBonus" (click)="selection.toggle(row)" min="0">
           <mat-icon matSuffix>edit</mat-icon>
 				</mat-form-field>
 			</mat-cell>
@@ -105,7 +105,7 @@
       <mat-header-cell *matHeaderCellDef mat-sort-header> Tax % </mat-header-cell>
       <mat-cell *matCellDef="let row">
 				<mat-form-field appearance="outline">
-					<input matInput placeholder="Tax" [value]="row.tax" [(ngModel)]="row.tax" (click)="selection.toggle(row)">
+					<input matInput type="number" placeholder="Tax" [value]="row.tax" [(ngModel)]="row.tax" (click)="selection.toggle(row)" min="0">
           <mat-icon matSuffix>edit</mat-icon>
 				</mat-form-field>
 			</mat-cell>
@@ -116,7 +116,7 @@
       <mat-header-cell *matHeaderCellDef mat-sort-header> $ Living Cost (month) </mat-header-cell>
       <mat-cell *matCellDef="let row">
 				<mat-form-field appearance="outline">
-					<input matInput placeholder="Living Cost" [value]="row.livingCost" [(ngModel)]="row.livingCost" (click)="selection.toggle(row)">
+					<input matInput type="number" placeholder="Living Cost" [value]="row.livingCost" [(ngModel)]="row.livingCost" (click)="selection.toggle(row)" min="0">
           <mat-icon matSuffix>edit</mat-icon>
 				</mat-form-field>
 			</mat-cell>
@@ -127,7 +127,7 @@
       <mat-header-cell *matHeaderCellDef mat-sort-header> Prestige (1 - 10) </mat-header-cell>
       <mat-cell *matCellDef="let row">
 				<mat-form-field appearance="outline">
-					<input matInput placeholder="Prestige" [value]="row.prestige" [(ngModel)]="row.prestige" (click)="selection.toggle(row)">
+					<input matInput type="number" placeholder="Prestige" [value]="row.prestige" [(ngModel)]="row.prestige" (click)="selection.toggle(row)" min="1" max="10">
           <mat-icon matSuffix>edit</mat-icon>
 				</mat-form-field>
 			</mat-cell>
@@ -138,7 +138,7 @@
       <mat-header-cell *matHeaderCellDef mat-sort-header> Happiness (1 - 10) </mat-header-cell>
       <mat-cell *matCellDef="let row">
 				<mat-form-field appearance="outline">
-					<input matInput placeholder="Happiness" [value]="row.happiness" [(ngModel)]="row.happiness" (click)="selection.toggle(row)">
+					<input matInput type="number" placeholder="Happiness" [value]="row.happiness" [(ngModel)]="row.happiness" (click)="selection.toggle(row)" min="1" max="10">
           <mat-icon matSuffix>edit</mat-icon>
 				</mat-form-field>
 			</mat-cell>
@@ -149,7 +149,7 @@
       <mat-header-cell *matHeaderCellDef mat-sort-header> Notes </mat-header-cell>
       <mat-cell *matCellDef="let row">
 				<mat-form-field appearance="outline">
-					<textarea matInput placeholder="Notes" style="height:11px;" [value]="row.notes" [(ngModel)]="row.notes" (click)="selection.toggle(row)"></textarea>
+					<textarea matInput placeholder="Notes" [value]="row.notes" [(ngModel)]="row.notes" (click)="selection.toggle(row)"></textarea>
           <mat-icon matSuffix>edit</mat-icon>
 				</mat-form-field>
 			</mat-cell>
@@ -162,5 +162,5 @@
 
   </mat-table>
 
-  <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 </div>

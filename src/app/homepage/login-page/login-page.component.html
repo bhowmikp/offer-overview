@@ -1,6 +1,9 @@
-<h3>Howdy, GUEST</h3>
-<p>Login to get started...</p>
+<p class='header'>Member Login</p>
 
-<button (click)="auth.googleLogin()">
-    <i class="fa fa-google"></i> Connect Google
-</button>
+<div class="loginOptions row justify-content-center">
+  <button class="googleButton" (click)="auth.googleLogin()">
+    <p>
+      <i class="fab fa-google"></i> Continue with Google
+    </p>
+  </button>
+</div>

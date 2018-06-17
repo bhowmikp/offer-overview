@@ -51,7 +51,7 @@
     <form [formGroup]="fourthFormGroup" #formFour="ngForm">
       <ng-template matStepLabel>Tenure Length (Month(s))</ng-template>
       <mat-form-field>
-        <input matInput placeholder="Tenure" type="number" formControlName="jobTenure" name="jobTenure" value="12">
+        <input matInput placeholder="Tenure" type="number" formControlName="jobTenure" name="jobTenure" value="12" min="1">
         <span matSuffix> month(s)</span>
       </mat-form-field>
       <div>
@@ -65,7 +65,7 @@
     <form [formGroup]="fifthFormGroup" #formFive="ngForm">
       <ng-template matStepLabel>Salary (Month)</ng-template>
       <mat-form-field>
-        <input matInput placeholder="Salary" type="number" formControlName="salary" name="salary">
+        <input matInput placeholder="Salary" type="number" formControlName="salary" name="salary" min="0">
         <span matPrefix>$&nbsp;</span>
         <span matSuffix>.00 / month</span>
       </mat-form-field>
@@ -80,7 +80,7 @@
     <form [formGroup]="sixthFormGroup" #formSix="ngForm">
       <ng-template matStepLabel>Signing Bonus</ng-template>
       <mat-form-field>
-        <input matInput placeholder="Signing Bonus" type="number" formControlName="signingBonus" name="signingBonus">
+        <input matInput placeholder="Signing Bonus" type="number" formControlName="signingBonus" name="signingBonus" min="0">
         <span matPrefix>$&nbsp;</span>
         <span matSuffix>.00</span>
       </mat-form-field>
@@ -95,7 +95,7 @@
     <form [formGroup]="seventhFormGroup" #formSeven="ngForm">
       <ng-template matStepLabel>Tax</ng-template>
       <mat-form-field>
-        <input matInput placeholder="Tax" type="number" formControlName="tax" name="tax">
+        <input matInput placeholder="Tax" type="number" formControlName="tax" name="tax" min="0">
         <span matSuffix>%</span>
       </mat-form-field>
       <div>
@@ -109,7 +109,7 @@
     <form [formGroup]="eighthFormGroup" #formEight="ngForm">
       <ng-template matStepLabel>Living Cost (Monthly)</ng-template>
       <mat-form-field>
-        <input matInput placeholder="Living Cost (Monthly)" type="number" formControlName="livingCost" name="livingCost">
+        <input matInput placeholder="Living Cost (Monthly)" type="number" formControlName="livingCost" name="livingCost" min="0">
         <span matPrefix>$&nbsp;</span>
         <span matSuffix>.00</span>
       </mat-form-field>
@@ -124,7 +124,7 @@
     <form [formGroup]="ninthFormGroup" #formNine="ngForm">
       <ng-template matStepLabel>Prestige (1 - 10)</ng-template>
       <mat-form-field>
-        <input matInput placeholder="Prestige" type="number" formControlName="prestige" name="prestige">
+        <input matInput placeholder="Prestige" type="number" formControlName="prestige" name="prestige" min="1" max="10">
       </mat-form-field>
       <div>
         <button mat-button matStepperPrevious>Back</button>
@@ -137,7 +137,7 @@
     <form [formGroup]="tenthFormGroup" #formTen="ngForm">
       <ng-template matStepLabel>Happiness (1 - 10)</ng-template>
       <mat-form-field>
-        <input matInput placeholder="Happiness" type="number" formControlName="happiness" name="happiness">
+        <input matInput placeholder="Happiness" type="number" formControlName="happiness" name="happiness" min="1" max="10">
       </mat-form-field>
       <div>
         <button mat-button matStepperPrevious>Back</button>
