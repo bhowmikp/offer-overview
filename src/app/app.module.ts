@@ -15,6 +15,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { LoginPageComponent } from './homepage/login-page/login-page.component';
 import { TablePageComponent } from './homepage/table-page/table-page.component';
 import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
+import { RowAddFormComponent } from './homepage/table-page/row-add-form/row-add-form.component';
 
 import {
   MatAutocompleteModule,
@@ -85,7 +86,8 @@ import {CdkTableModule} from '@angular/cdk/table';
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-  ]
+  ],
+  declarations: []
 })
 export class DemoMaterialModule {}
 
@@ -95,7 +97,8 @@ export class DemoMaterialModule {}
     HomepageComponent,
     LoginPageComponent,
     TablePageComponent,
-    DashboardPageComponent
+    DashboardPageComponent,
+    RowAddFormComponent
   ],
   imports: [
     BrowserModule,
