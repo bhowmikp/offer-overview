@@ -1,14 +1,25 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { JobsService } from '../../core/jobs.service';
 import { MatPaginator, MatSort, MatTableDataSource, MatSnackBar } from '@angular/material';
-import { NgForm } from '@angular/forms';
+// import { NgForm } from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { SelectionModel } from '@angular/cdk/collections';
+import {MatStepperModule} from '@angular/material/stepper';
+
 
 export interface JobData {
   jobId: number;
   companyName: string;
+  positionTitle: string;
   location: string;
+  jobTenure: number;
   salary: number;
+  signingBonus: number;
+  tax: number;
+  livingCost: number;
+  prestige: number;
+  happiness: number;
+  notes: string;
 }
 
 
@@ -20,14 +31,69 @@ export interface JobData {
 export class TablePageComponent {
   displayedColumns = ['select', 'companyName', 'location', 'salary'];
   dataSource: MatTableDataSource<{}>;
+
   selection = new SelectionModel<{}>(true, []);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
+  // form
+  isLinear = true;
+
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
+  thirdFormGroup: FormGroup;
+  fourthFormGroup: FormGroup;
+  fifthFormGroup: FormGroup;
+  sixthFormGroup: FormGroup;
+  seventhFormGroup: FormGroup;
+  eighthFormGroup: FormGroup;
+  ninthFormGroup: FormGroup;
+  tenthFormGroup: FormGroup;
+  eleventhFormGroup: FormGroup;
+
+  isOptional: boolean = true;
+  notOptional: boolean = false;
+
   @Input() user;
 
-  constructor(private jobsService: JobsService, private snackBar: MatSnackBar) {
+  constructor(private jobsService: JobsService, private snackBar: MatSnackBar, private _formBuilder: FormBuilder) {
+  }
+
+  ngOnInit() {
+    this.firstFormGroup = this._formBuilder.group({
+      companyName: ['', Validators.required]
+    });
+    this.secondFormGroup = this._formBuilder.group({
+      positionTitle: ['', Validators.required]
+    });
+    this.thirdFormGroup = this._formBuilder.group({
+      location: ['', Validators.required]
+    });
+    this.fourthFormGroup = this._formBuilder.group({
+      jobTenure: ['', Validators.required]
+    });
+    this.fifthFormGroup = this._formBuilder.group({
+      salary: ['', Validators.required]
+    });
+    this.sixthFormGroup = this._formBuilder.group({
+      signingBonus: ['', Validators.required]
+    });
+    this.seventhFormGroup = this._formBuilder.group({
+      tax: ['', Validators.required]
+    });
+    this.eighthFormGroup = this._formBuilder.group({
+      livingCost: ['', Validators.required]
+    });
+    this.ninthFormGroup = this._formBuilder.group({
+      prestige: ['', Validators.required]
+    });
+    this.tenthFormGroup = this._formBuilder.group({
+      happiness: ['', Validators.required]
+    });
+    this.eleventhFormGroup = this._formBuilder.group({
+      notes: ['', Validators.required]
+    });
   }
 
   ngAfterViewInit() {
@@ -45,6 +111,7 @@ export class TablePageComponent {
   }
 
   onSubmit(form){
+    let formData = this.parse_forms(form);
     let jobsData = this.jobsService.getJobs(this.user.uid).subscribe(data => {
       let newJobId;
 
@@ -54,10 +121,18 @@ export class TablePageComponent {
         newJobId = data[0]['jobId'] + 1;
       }
 
-      if (form.value["companyName"] !== "" && form.value["companyName"] !== null) {
-        form.value.jobId = newJobId;
-        this.jobsService.addJob(this.user.uid, newJobId, form.value);
-        form.reset();
+      if (formData["companyName"] !== "" && formData["companyName"] !== null) {
+        let finalData = {};
+        let key;
+
+        finalData["jobId"] = newJobId;
+
+        for (let element of formData) {
+          key = Object.keys(element);
+          finalData[key] = element[key];
+        }
+
+        this.jobsService.addJob(this.user.uid, newJobId, finalData);
       }
 
       jobsData.unsubscribe();
@@ -97,6 +172,14 @@ export class TablePageComponent {
     this.isAllSelected() ?
         this.selection.clear() :
         this.dataSource.data.forEach(row => this.selection.select(row));
+  }
+
+  private parse_forms(forms) {
+    let data = [];
+    for (let form of forms) {
+      data.push(form.value);
+    }
+    return data;
   }
 
 }
