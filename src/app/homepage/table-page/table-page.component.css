@@ -26,4 +26,14 @@
   z-index: 1;
   background-color: inherit;
   text-align: center;
+  background-color: #EBEAEA;
+}
+
+/* zebra table */
+.mat-row:nth-child(odd) {
+  background-color: #F7F3F3;
+}
+
+.mat-header-cell {
+  font-size: 18px;
 }

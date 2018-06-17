@@ -70,6 +70,8 @@ export class RowAddFormComponent implements OnInit {
 
   onSubmit(form){
     let formData = this.parse_forms(form);
+    let finalData = this.parse_form_to_object(formData);
+
     let jobsData = this.jobsService.getJobs(this.user.uid).subscribe(data => {
       let newJobId;
 
@@ -79,15 +81,8 @@ export class RowAddFormComponent implements OnInit {
         newJobId = parseInt(data[0]['jobId'], 10) + 1;
       }
 
-      let finalData = {};
-      let key;
 
       finalData["jobId"] = newJobId;
-
-      for (let element of formData) {
-        key = Object.keys(element);
-        finalData[key] = element[key];
-      }
 
       this.jobsService.addJob(this.user.uid, newJobId, finalData);
 
@@ -101,5 +96,33 @@ export class RowAddFormComponent implements OnInit {
       data.push(form.value);
     }
     return data;
+  }
+
+  private parse_form_to_object(formData) {
+    let key;
+    let finalData = {};
+
+    for (let element of formData) {
+      key = Object.keys(element);
+
+      // set defaults
+      if (key == "jobTenure" && element[key] == "") {
+        finalData[key] = 12;
+      } else if (key == "signingBonus" && element[key] == "") {
+        finalData[key] = 0;
+      } else if (key == "tax" && element[key] == "") {
+        finalData[key] = 0;
+      } else if (key == "livingCost" && element[key] == "") {
+        finalData[key] = 0;
+      } else if (key == "prestige" && element[key] == "") {
+        finalData[key] = 5;
+      } else if (key == "happiness" && element[key] == "") {
+        finalData[key] = 5;
+      } else {
+        finalData[key] = element[key];
+      }
+    }
+    
+    return finalData;
   }
 }
