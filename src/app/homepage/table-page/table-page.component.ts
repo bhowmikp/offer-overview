@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { JobsService } from '../../core/jobs.service';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatSnackBar } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 
 
@@ -40,7 +40,7 @@ export class TablePageComponent {
 
   @Input() user;
 
-  constructor(private jobsService: JobsService) {
+  constructor(private jobsService: JobsService, private snackBar: MatSnackBar) {
   }
 
   ngOnInit() { }
@@ -84,6 +84,8 @@ export class TablePageComponent {
       console.log(value["happiness"]);
       value["happiness"] = 5;
     }
+
+    this.openSnackBar("Information Updated", "Alright");
 
     this.jobsService.addJob(this.user.uid, value["jobId"], value);
   }
@@ -137,6 +139,12 @@ export class TablePageComponent {
     } else if (value.value > 10){
       return "00FF00";
     }
+  }
+
+  private openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 
 }

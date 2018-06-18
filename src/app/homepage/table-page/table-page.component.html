@@ -2,16 +2,21 @@
 
 <app-row-add-form [user]=user></app-row-add-form>
 
-<!-- Delete Button -->
-<button type="button" name="delete" (click)="deleteUsers()">Delete</button>
+<div class="row">
+  <!-- Filter Data -->
+  <div class="col-md-6 text-center">
+    <span class="float-md-left">
+      <mat-form-field class="filter">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+    </span>
+  </div>
 
-<!-- Filter Data -->
-<div class="example-header">
-  <mat-form-field>
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-  </mat-form-field>
+  <!-- Delete Button -->
+  <div class="col-md-6 text-center">
+    <button type="button" class="btn btn-danger float-md-right" name="delete" (click)="deleteUsers()">Delete</button>
+  </div>
 </div>
-
 
 <!-- Table -->
 <div class="example-container mat-elevation-z8">

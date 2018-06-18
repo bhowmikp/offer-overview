@@ -37,3 +37,7 @@
 .mat-header-cell {
   font-size: 18px;
 }
+
+.filter{
+  padding-left: 10px;
+}
