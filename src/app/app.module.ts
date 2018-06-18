@@ -16,6 +16,10 @@ import { LoginPageComponent } from './homepage/login-page/login-page.component';
 import { TablePageComponent } from './homepage/table-page/table-page.component';
 import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
 import { RowAddFormComponent } from './homepage/table-page/row-add-form/row-add-form.component';
+import { AllDataChartComponent } from './dashboard-page/all-data-chart/all-data-chart.component';
+import { TotalEarningComponent } from './dashboard-page/total-earning/total-earning.component';
+import { TakeHomeEarningComponent } from './dashboard-page/take-home-earning/take-home-earning.component';
+import { OverallEarningComponent } from './dashboard-page/overall-earning/overall-earning.component';
 
 import {
   MatAutocompleteModule,
@@ -98,7 +102,11 @@ export class DemoMaterialModule {}
     LoginPageComponent,
     TablePageComponent,
     DashboardPageComponent,
-    RowAddFormComponent
+    RowAddFormComponent,
+    AllDataChartComponent,
+    TotalEarningComponent,
+    TakeHomeEarningComponent,
+    OverallEarningComponent
   ],
   imports: [
     BrowserModule,

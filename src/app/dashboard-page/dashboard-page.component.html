@@ -1,24 +1,22 @@
 <mat-tab-group>
   <mat-tab label="All Data">
     <ng-template matTabContent>
-      <div class="chart">
-        <canvas id="canvas">{{ chart }}</canvas>
-      </div>
+      <app-all-data-chart></app-all-data-chart>
     </ng-template>
   </mat-tab>
-  <mat-tab label="Total Earning">
+  <mat-tab label="Total Earning (Monthly)">
     <ng-template matTabContent>
-      The Second Content
+      <app-total-earning></app-total-earning>
     </ng-template>
   </mat-tab>
-  <mat-tab label="Take Home Earning">
+  <mat-tab label="Take Home Earning (Monthly)">
     <ng-template matTabContent>
-      The Third Content
+      <app-take-home-earning></app-take-home-earning>
     </ng-template>
   </mat-tab>
-  <mat-tab label="Overall Earning">
+  <mat-tab label="Overall Earning (Monthly)">
     <ng-template matTabContent>
-      The Fourth Content
+      <app-overall-earning></app-overall-earning>
     </ng-template>
   </mat-tab>
 </mat-tab-group>
