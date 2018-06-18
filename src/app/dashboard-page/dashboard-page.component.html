@@ -1,7 +1,9 @@
 <mat-tab-group>
   <mat-tab label="All Data">
     <ng-template matTabContent>
-      The First Content
+      <div class="chart">
+        <canvas id="canvas">{{ chart }}</canvas>
+      </div>
     </ng-template>
   </mat-tab>
   <mat-tab label="Total Earning">
