@@ -138,7 +138,7 @@ export class RowAddFormComponent implements OnInit {
         finalData[key] = value;
       }
     }
-    
+
     return finalData;
   }
 }
