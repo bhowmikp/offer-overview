@@ -8,7 +8,9 @@ import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firesto
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
-
+/*
+* Account info of user
+*/
 export interface User {
   uid: string;
   email: string;
@@ -39,16 +41,18 @@ export class AuthService {
     );
   }
 
-
+  /*
+  * Google authentication
+  */
   googleLogin() {
     const provider = new auth.GoogleAuthProvider();
     return this.oAuthLogin(provider);
   }
 
-  // getUserInfo() {
-  //   return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
-  // }
 
+  /*
+  * Pop up screen to enter user credentials
+  */
   private oAuthLogin(provider) {
     return this.afAuth.auth.signInWithPopup(provider)
       .then((credential) => {
@@ -56,6 +60,9 @@ export class AuthService {
       });
   }
 
+  /*
+  * Update user account info
+  */
   private updateUserData(user) {
     // Sets user data to firestore on login
 
@@ -72,6 +79,9 @@ export class AuthService {
 
   }
 
+  /*
+  * Navigate to home page when user signs out
+  */
   signOut() {
     this.afAuth.auth.signOut().then(() => {
         this.router.navigate(['/']);

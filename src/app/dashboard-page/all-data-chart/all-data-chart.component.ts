@@ -18,6 +18,9 @@ export class AllDataChartComponent implements OnInit, AfterViewInit {
   ngOnInit() {
   }
 
+  /*
+  * Creates chart
+  */
   ngAfterViewInit() {
     this.jobsService.getJobs(this.user.uid).subscribe(data => {
       const companyNames = [];

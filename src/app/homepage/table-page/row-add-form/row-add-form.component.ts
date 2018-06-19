@@ -25,6 +25,7 @@ export class RowAddFormComponent implements OnInit {
   tenthFormGroup: FormGroup;
   eleventhFormGroup: FormGroup;
 
+  // whether the form is optional or not
   isOptional = true;
   notOptional = false;
 
@@ -32,6 +33,9 @@ export class RowAddFormComponent implements OnInit {
 
   constructor(private jobsService: JobsService, private _formBuilder: FormBuilder) { }
 
+  /*
+  * Initializers all the forms
+  */
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
       companyName: ['', Validators.required]
@@ -68,6 +72,9 @@ export class RowAddFormComponent implements OnInit {
     });
   }
 
+  /*
+  * When form is submitted parse it and add row to database
+  */
   onSubmit(form) {
     const formData = this.parse_forms(form);
     const finalData = this.parse_form_to_object(formData);
@@ -89,6 +96,9 @@ export class RowAddFormComponent implements OnInit {
     });
   }
 
+  /*
+  * Extracts data from the forms and places inside array
+  */
   private parse_forms(forms) {
     const data = [];
     for (const form of forms) {
@@ -97,6 +107,9 @@ export class RowAddFormComponent implements OnInit {
     return data;
   }
 
+  /*
+  * Validation of the inputs in the form
+  */
   private parse_form_to_object(formData) {
     let key;
     let value;
@@ -125,7 +138,7 @@ export class RowAddFormComponent implements OnInit {
         finalData[key] = value;
       }
     }
-    console.log(finalData);
+    
     return finalData;
   }
 }

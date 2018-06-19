@@ -3,7 +3,9 @@ import { JobsService } from '../../core/jobs.service';
 import { MatPaginator, MatSort, MatTableDataSource, MatSnackBar } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 
-
+/*
+* All the entries in the database
+*/
 export interface JobData {
   jobId: number;
   companyName: string;
@@ -45,6 +47,9 @@ export class TablePageComponent implements OnInit, AfterViewInit {
 
   ngOnInit() { }
 
+  /*
+  * Creates table to sort and have different pages
+  */
   ngAfterViewInit() {
     this.jobsService.getJobs(this.user.uid).subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
@@ -53,12 +58,19 @@ export class TablePageComponent implements OnInit, AfterViewInit {
     });
   }
 
+  /*
+  * Filter the table
+  */
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
     this.dataSource.filter = filterValue;
   }
 
+  /*
+  * Update cell in the table. Validate the row containing the cell before added
+  * to database
+  */
   save(value) {
     if (value['jobTenure'] === '' || value['jobTenure'] < 1) {
       value['jobTenure'] = 12;
@@ -93,6 +105,9 @@ export class TablePageComponent implements OnInit, AfterViewInit {
     this.jobsService.addJob(this.user.uid, value['jobId'], value);
   }
 
+  /*
+  * Deleted selected entries
+  */
   deleteUsers() {
     const jobIdDelete = [];
     for (const job of this.selection['selected']) {
@@ -116,6 +131,9 @@ export class TablePageComponent implements OnInit, AfterViewInit {
         this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
+  /*
+  * Given a number assign a color from red to yellow to green to it
+  */
   getColor(color) {
     const value = parseInt(color.value, 10);
 
@@ -146,6 +164,9 @@ export class TablePageComponent implements OnInit, AfterViewInit {
     }
   }
 
+  /*
+  * Opens notification with the message and action for 2 seconds
+  */
   private openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 2000,
