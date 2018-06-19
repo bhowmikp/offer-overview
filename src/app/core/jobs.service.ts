@@ -12,7 +12,7 @@ export class JobsService {
   constructor(private afs: AngularFirestore) { }
 
   addJob(userId, jobId, item) {
-    let jobsCollection = this.afs.collection(`users/${userId}/jobs`);
+    const jobsCollection = this.afs.collection(`users/${userId}/jobs`);
     jobsCollection.doc(String(jobId)).set(item);
   }
 
@@ -21,7 +21,7 @@ export class JobsService {
   }
 
   deleteJobs(userId, jobNumber) {
-    for (let job of jobNumber) {
+    for (const job of jobNumber) {
       this.afs.doc(`users/${userId}/jobs/${job}`).delete();
     }
   }

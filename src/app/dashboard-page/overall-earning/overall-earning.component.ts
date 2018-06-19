@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
 import { Chart } from 'chart.js';
 import { JobsService } from '../../core/jobs.service';
 
@@ -7,7 +7,7 @@ import { JobsService } from '../../core/jobs.service';
   templateUrl: './overall-earning.component.html',
   styleUrls: ['./overall-earning.component.css']
 })
-export class OverallEarningComponent implements OnInit {
+export class OverallEarningComponent implements OnInit, AfterViewInit {
   chart = [];
 
   @Input() user;
@@ -19,18 +19,22 @@ export class OverallEarningComponent implements OnInit {
 
   ngAfterViewInit() {
     this.jobsService.getJobs(this.user.uid).subscribe(data => {
-      let companyNames = [];
-      let takeHomeEarning = [];
-      let calculateTaxMonthly;
-      let happinessMoney;
-      let prestigeMoney;
+      const companyNames = [];
+      const takeHomeEarning = [];
+      let calculateTaxMonthly: number;
+      let happinessMoney: number;
+      let prestigeMoney: number;
 
-      for (let job of data) {
+      for (const job of data) {
         companyNames.push(job['companyName']);
-        calculateTaxMonthly = (((job['salary'] * 12) + job['signingBonus']) * (job['tax'] / 100)) / 12;
+        calculateTaxMonthly = ((
+          (job['salary'] * 12) + job['signingBonus']) *
+          (job['tax'] / 100)) / 12;
         happinessMoney = (5 - job['happiness']) * 100;
         prestigeMoney = (5 - job['prestige']) * 100;
-        takeHomeEarning.push(job['salary'] + (job['signingBonus'] / job['jobTenure']) + happinessMoney + prestigeMoney - job['livingCost'] - calculateTaxMonthly);
+        takeHomeEarning.push(
+          job['salary'] + (job['signingBonus'] / job['jobTenure']) +
+          happinessMoney + prestigeMoney - job['livingCost'] - calculateTaxMonthly);
       }
 
       this.chart = new Chart('canvas3', {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
 import { Chart } from 'chart.js';
 import { JobsService } from '../../core/jobs.service';
 
@@ -7,7 +7,7 @@ import { JobsService } from '../../core/jobs.service';
   templateUrl: './take-home-earning.component.html',
   styleUrls: ['./take-home-earning.component.css']
 })
-export class TakeHomeEarningComponent implements OnInit {
+export class TakeHomeEarningComponent implements OnInit, AfterViewInit {
   chart = [];
 
   @Input() user;
@@ -19,11 +19,11 @@ export class TakeHomeEarningComponent implements OnInit {
 
   ngAfterViewInit() {
     this.jobsService.getJobs(this.user.uid).subscribe(data => {
-      let companyNames = [];
-      let takeHomeEarning = [];
-      let calculateTaxMonthly;
+      const companyNames = [];
+      const takeHomeEarning = [];
+      let calculateTaxMonthly: number;
 
-      for (let job of data) {
+      for (const job of data) {
         companyNames.push(job['companyName']);
         calculateTaxMonthly = (((job['salary'] * 12) + job['signingBonus']) * (job['tax'] / 100)) / 12;
         takeHomeEarning.push(job['salary'] + (job['signingBonus'] / job['jobTenure']) - job['livingCost'] - calculateTaxMonthly);

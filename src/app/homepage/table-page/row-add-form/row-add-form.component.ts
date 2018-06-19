@@ -25,8 +25,8 @@ export class RowAddFormComponent implements OnInit {
   tenthFormGroup: FormGroup;
   eleventhFormGroup: FormGroup;
 
-  isOptional: boolean = true;
-  notOptional: boolean = false;
+  isOptional = true;
+  notOptional = false;
 
   @Input() user;
 
@@ -68,20 +68,20 @@ export class RowAddFormComponent implements OnInit {
     });
   }
 
-  onSubmit(form){
-    let formData = this.parse_forms(form);
-    let finalData = this.parse_form_to_object(formData);
+  onSubmit(form) {
+    const formData = this.parse_forms(form);
+    const finalData = this.parse_form_to_object(formData);
 
-    let jobsData = this.jobsService.getJobs(this.user.uid).subscribe(data => {
+    const jobsData = this.jobsService.getJobs(this.user.uid).subscribe(data => {
       let newJobId;
 
-      if (data === undefined || data.length == 0) {
+      if (data === undefined || data.length === 0) {
         newJobId = 1;
       } else {
         newJobId = parseInt(data[0]['jobId'], 10) + 1;
       }
 
-      finalData["jobId"] = newJobId;
+      finalData['jobId'] = newJobId;
 
       this.jobsService.addJob(this.user.uid, newJobId, finalData);
 
@@ -90,8 +90,8 @@ export class RowAddFormComponent implements OnInit {
   }
 
   private parse_forms(forms) {
-    let data = [];
-    for (let form of forms) {
+    const data = [];
+    for (const form of forms) {
       data.push(form.value);
     }
     return data;
@@ -99,29 +99,33 @@ export class RowAddFormComponent implements OnInit {
 
   private parse_form_to_object(formData) {
     let key;
-    let finalData = {};
+    let value;
+    const finalData = {};
 
-    for (let element of formData) {
-      key = Object.keys(element);
+    for (const element of formData) {
+      key = Object.keys(element)[0];
+      value = Object.values(element)[0];
 
       // set defaults
-      if (key == "jobTenure" && (element[key] == "" || element[key] < 1)) {
+      if (key === 'jobTenure' && (value === '' || value < 1)) {
         finalData[key] = 12;
-      } else if (key == "signingBonus" && (element[key] == "" || element[key] < 0)) {
+      } else if (key === 'salary' && (value === '' || value < 0)) {
         finalData[key] = 0;
-      } else if (key == "tax" && (element[key] == "" || element[key] < 0)) {
+      } else if (key === 'signingBonus' && (value === '' || value < 0)) {
         finalData[key] = 0;
-      } else if (key == "livingCost" && (element[key] == "" || element[key] < 0)) {
+      } else if (key === 'tax' && (value === '' || value < 0)) {
         finalData[key] = 0;
-      } else if (key == "prestige" && (element[key] == "" || element[key] < 0 || element[key] >10)) {
+      } else if (key === 'livingCost' && (value === '' || value < 0)) {
+        finalData[key] = 0;
+      } else if (key === 'prestige' && (value === '' || value < 1 || value > 10)) {
         finalData[key] = 5;
-      } else if (key == "happiness" && (element[key] == "" || element[key] < 0 || element[key] >10)) {
+      } else if (key === 'happiness' && (value === '' || value < 1 || value > 10)) {
         finalData[key] = 5;
       } else {
-        finalData[key] = element[key];
+        finalData[key] = value;
       }
     }
-
+    console.log(finalData);
     return finalData;
   }
 }

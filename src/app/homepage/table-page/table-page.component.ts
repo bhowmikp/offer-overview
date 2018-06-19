@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, ViewChild } from '@angular/core';
 import { JobsService } from '../../core/jobs.service';
 import { MatPaginator, MatSort, MatTableDataSource, MatSnackBar } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -25,7 +25,7 @@ export interface JobData {
   templateUrl: './table-page.component.html',
   styleUrls: ['./table-page.component.css']
 })
-export class TablePageComponent {
+export class TablePageComponent implements OnInit, AfterViewInit {
   displayedColumns = [
     'select', 'companyName', 'positionTitle', 'location',
     'jobTenure', 'salary', 'signingBonus', 'tax',
@@ -60,39 +60,42 @@ export class TablePageComponent {
   }
 
   save(value) {
-    if (value["jobTenure"] == "" || value["jobTenure"] < 1) {
-      value["jobTenure"] = 12;
+    if (value['jobTenure'] === '' || value['jobTenure'] < 1) {
+      value['jobTenure'] = 12;
     }
 
-    if (value["signingBonus"] == "" || value["signingBonus"] < 0) {
-      value["signingBonus"] = 0;
+    if (value['salary'] === '' || value['salary'] < 0) {
+      value['salary'] = 0;
     }
 
-    if (value["tax"] == "" || value["tax"] < 0) {
-      value["tax"] = 0;
+    if (value['signingBonus'] === '' || value['signingBonus'] < 0) {
+      value['signingBonus'] = 0;
     }
 
-    if (value["livingCost"] == "" || value["livingCost"] < 0) {
-      value["livingCost"] = 0;
+    if (value['tax'] === '' || value['tax'] < 0) {
+      value['tax'] = 0;
     }
 
-    if (value["prestige"] == "" || value["prestige"] < 0 || value["prestige"] >10) {
-      value["prestige"] = 5;
+    if (value['livingCost'] === '' || value['livingCost'] < 0) {
+      value['livingCost'] = 0;
     }
 
-    if (value["happiness"] == "" || value["happiness"] < 0 || value["happiness"] > 10) {
-      console.log(value["happiness"]);
-      value["happiness"] = 5;
+    if (value['prestige'] === '' || value['prestige'] < 1 || value['prestige'] > 10) {
+      value['prestige'] = 5;
     }
 
-    this.openSnackBar("Information Updated", "Alright");
+    if (value['happiness'] === '' || value['happiness'] < 1 || value['happiness'] > 10) {
+      value['happiness'] = 5;
+    }
 
-    this.jobsService.addJob(this.user.uid, value["jobId"], value);
+    this.openSnackBar('Information Updated', 'Alright');
+
+    this.jobsService.addJob(this.user.uid, value['jobId'], value);
   }
 
   deleteUsers() {
-    let jobIdDelete = [];
-    for (let job of this.selection['selected']) {
+    const jobIdDelete = [];
+    for (const job of this.selection['selected']) {
       jobIdDelete.push(job['jobId']);
     }
     this.jobsService.deleteJobs(this.user.uid, jobIdDelete);
@@ -103,7 +106,7 @@ export class TablePageComponent {
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
-    return numSelected == numRows;
+    return numSelected === numRows;
   }
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
@@ -113,31 +116,33 @@ export class TablePageComponent {
         this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
-  getColor(value) {
-    if (value.value == 1) {
-      return "#FF7700";
-    } else if (value.value == 2){
-      return "#FF9900";
-    } else if (value.value == 3){
-      return "#FFBB00";
-    } else if (value.value == 4){
-      return "#FFDD00";
-    } else if (value.value == 5){
-      return "#FFFF00";
-    } else if (value.value == 6){
-      return "#DDFF00";
-    } else if (value.value == 7){
-      return "#BBFF00";
-    } else if (value.value == 8){
-      return "#99FF00";
-    } else if (value.value == 9){
-      return "#77FF00";
-    } else if (value.value == 10){
-      return "#55FF00";
-    } else if (value.value < 1){
-      return "#FF0000";
-    } else if (value.value > 10){
-      return "00FF00";
+  getColor(color) {
+    const value = parseInt(color.value, 10);
+
+    if (value === 1) {
+      return '#FF7700';
+    } else if (value === 2) {
+      return '#FF9900';
+    } else if (value === 3) {
+      return '#FFBB00';
+    } else if (value === 4) {
+      return '#FFDD00';
+    } else if (value === 5) {
+      return '#FFFF00';
+    } else if (value === 6) {
+      return '#DDFF00';
+    } else if (value === 7) {
+      return '#BBFF00';
+    } else if (value === 8) {
+      return '#99FF00';
+    } else if (value === 9) {
+      return '#77FF00';
+    } else if (value === 10) {
+      return '#55FF00';
+    } else if (value < 1) {
+      return '#FF0000';
+    } else if (value > 10) {
+      return '00FF00';
     }
   }
 

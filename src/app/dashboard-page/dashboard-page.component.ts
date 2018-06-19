@@ -9,7 +9,7 @@ import { AuthService } from '../core/auth.service';
 })
 export class DashboardPageComponent implements OnInit {
 
-  constructor(public auth : AuthService) {}
+  constructor(public auth: AuthService) {}
 
   ngOnInit() {
   }
