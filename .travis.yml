@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+  - "10.1"
+
+before_script:
+  - npm install
+  - npm install -g @angular/cli
+
+install:
+  - docker pull bhowmikp/offer-overview
+  - docker run bhowmikp/offer-overview /bin/sh -c "ng build --prod --aot --build-optimizer"
+
+script:
+  - ng lint
+  - ng build --prod --aot --build-optimizer --named-chunks --output-hashing all
