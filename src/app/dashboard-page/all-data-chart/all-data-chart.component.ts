@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Chart } from 'chart.js';
 import { JobsService } from '../../core/jobs.service';
 
@@ -11,13 +11,15 @@ export class AllDataChartComponent implements OnInit {
 
   chart = [];
 
+  @Input() user;
+
   constructor(private jobsService: JobsService) { }
 
   ngOnInit() {
   }
 
   ngAfterViewInit() {
-    this.jobsService.getJobs('SOYzrrmi7revQ6TO5SG7rC8m4mE2').subscribe(data => {
+    this.jobsService.getJobs(this.user.uid).subscribe(data => {
       let companyNames = [];
       let salary = [];
       let signingBonus = [];

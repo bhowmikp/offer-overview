@@ -10,13 +10,15 @@ import { JobsService } from '../../core/jobs.service';
 export class OverallEarningComponent implements OnInit {
   chart = [];
 
+  @Input() user;
+
   constructor(private jobsService: JobsService) { }
 
   ngOnInit() {
   }
 
   ngAfterViewInit() {
-    this.jobsService.getJobs('SOYzrrmi7revQ6TO5SG7rC8m4mE2').subscribe(data => {
+    this.jobsService.getJobs(this.user.uid).subscribe(data => {
       let companyNames = [];
       let takeHomeEarning = [];
       let calculateTaxMonthly;
@@ -37,7 +39,7 @@ export class OverallEarningComponent implements OnInit {
           labels: companyNames,   // x-axis
           datasets: [
             {
-              label: 'Total Home Earning (Monthly)',
+              label: 'Overall Earning (Monthly)',
               backgroundColor: '#9BE1DF',
               borderColor: '#8ECDC9',
               borderWidth: 1,
@@ -54,7 +56,7 @@ export class OverallEarningComponent implements OnInit {
           },
           title: {
             display: true,
-            text: 'Total Earning per Month'
+            text: 'Overall Earning per Month'
           },
           scales: {
             xAxes: [{

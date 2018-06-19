@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
+import { AuthService } from '../core/auth.service';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -8,8 +9,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 })
 export class DashboardPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(public auth : AuthService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
 }

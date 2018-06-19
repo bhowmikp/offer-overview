@@ -81,7 +81,6 @@ export class RowAddFormComponent implements OnInit {
         newJobId = parseInt(data[0]['jobId'], 10) + 1;
       }
 
-
       finalData["jobId"] = newJobId;
 
       this.jobsService.addJob(this.user.uid, newJobId, finalData);
