@@ -1,27 +1,52 @@
-# OfferOverview
+# [OfferOverview](https://offer-overview-e9745.firebaseapp.com/)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
+The goal of the app is to provide an interface to organize job offers. It provides a graphical representation so the user can decide which job offer is the best suited for them.
 
-## Development server
+- Serverless Progressive Web App (PWA) written with Angular as the frontend, and Firebase Realtime Database as the NoSQL database
+- Since the app is serverless it is highly scalable and due to Firebase it has a 99.95% uptime
+- The app is set up in a way that it works offline and stores the data into the database once its connected to the internet
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Getting Started
 
-## Code scaffolding
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Prerequisites
 
-## Build
+What things you need to install the software and how to install them
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+```
+Install Node
+Install NPM
+```
 
-## Running unit tests
+### Installing
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+A step by step series of examples that tell you how to get a development env running
 
-## Running end-to-end tests
+```
+npm install -g @angular/cli
+npm install
+ng serve
+```
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## Running the tests
 
-## Further help
+Explain how to run the automated tests for this system
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+### And coding style tests
+
+Explain what these tests test and why
+
+```
+ng lint
+```
+
+## Built With
+
+* [Angular](https://angular.io/) - Web Framework
+
+## Authors
+
+* **Prantar Bhowmik** - *Initial work* - [bhowmikp](https://github.com/bhowmikp)
+
+See also the list of [contributors](https://github.com/bhowmikp/bhowmikp.github.io/graphs/contributors) who participated in this project.
