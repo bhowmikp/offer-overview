@@ -1,4 +1,4 @@
-# [OfferOverview](https://offer-overview-e9745.firebaseapp.com/)
+# [OfferOverview](https://offer-overview-1a6b4.firebaseapp.com)
 
 The goal of the app is to provide an interface to organize job offers. It provides a graphical representation so the user can decide which job offer is the best suited for them.
 
